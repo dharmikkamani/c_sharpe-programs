@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.Sql;
+using System.Data.SqlClient;
+
+namespace Bills
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+          
+
+            string view = "select * from Cust_Detail where mnumber = '" + textBox2.Text+"'";
+            SqlDataAdapter da1 = new SqlDataAdapter(view, Class1.con);
+            DataTable dt1 = new DataTable();
+            int c = da1.Fill(dt1);
+            
+                
+                 if (c == 1)
+                  {
+                     MessageBox.Show("Meter Number Must Be Unique");
+                 }
+                else
+                { 
+                   
+                string insert = "insert into Cust_Detail values('" + textBox1.Text + "','" + textBox2.Text + "') ";
+                SqlDataAdapter da = new SqlDataAdapter(insert, Class1.con);
+                DataTable dt = new DataTable();
+                int check = da.Fill(dt);
+                if (check == 0)
+                {
+                    MessageBox.Show("Customer Entered");
+                }
+                else
+                {
+                    MessageBox.Show("Something Wrong");
+                }
+            }
+            }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox1.Focus();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.Show();
+            this.Hide();
+        }
+    }
+    }

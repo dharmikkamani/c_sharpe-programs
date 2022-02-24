@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Bills
+{
+    public partial class Form2 : Form
+    {
+        string date;
+        string month;
+        public Form2()
+        {
+            InitializeComponent();
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
+        }
+         private void button1_Click(object sender, EventArgs e)
+        {
+            showd();
+        }
+        
+        
+        private void showd()
+        {
+        // This Code To Get System Month And Date
+            DateTime now = DateTime.Now;
+            date = now.ToShortDateString();
+            month = now.Month.ToString();
+            MessageBox.Show(month);
+            
+        } 
+         private void textBox3_TextChanged_1(object sender, EventArgs e)
+        {
+            textBox3.Text = date;
+            
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            showd();
+        }
+    }
+}

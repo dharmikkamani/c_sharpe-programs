@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.Sql;
+using System.Data.SqlClient;
+
+namespace WindowsFormsApp3
+{
+
+    
+    public partial class Form1 : Form
+    {
+        
+        int cr = 0;
+        int tr = 0;
+        DataTable dt = new DataTable();
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            disp();
+        }
+
+        private void disp()
+        {
+            string show = "SELECT * FROM Res";
+            SqlDataAdapter da = new SqlDataAdapter(show,Class1.con);
+           
+            da.Fill(dt);
+            tr = dt.Rows.Count;
+            if (tr >= 1)
+            {
+                nav();
+            }
+            else
+            {
+                MessageBox.Show("Record NOt Found");
+            }
+
+            
+        }
+
+        private void nav()
+        {
+            textBox1.Text = dt.Rows[cr]["Id"].ToString();
+            textBox2.Text = dt.Rows[cr]["Name"].ToString();
+            textBox3.Text = dt.Rows[cr]["cno"].ToString();
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (cr < tr-1)
+            {
+                cr++;
+                nav();
+            }
+            else
+            {
+                MessageBox.Show("No More Records");
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (cr > 0)
+            {
+                cr--;
+                nav();
+            }
+            else
+            {
+                MessageBox.Show("Last Record");
+            }
+            
+        }
+    }
+}
